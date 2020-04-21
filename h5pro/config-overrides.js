@@ -9,6 +9,10 @@ const path = require('path')
 // 生产环境
 const isProd = process.env.NODE_ENV === "production"
 
+/** 开发的时候随便开一个sourcemap，到了生产环境就关掉 */
+if (isProd) {
+    process.env.GENERATE_SOURCEMAP = 'false'
+}
 
 module.exports = override(
   fixBabelImports('import', {

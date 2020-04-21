@@ -21,21 +21,23 @@ import {
 
 const MainPage = React.lazy(() => import('../main'))
 const Search = React.lazy(() => import('../search'))
+const Category = React.lazy(() => import('../category'))
+const Page404 = React.lazy(() => import('../page404'))
 
 const NavigationLayout:FC = () =>{
     return (
         <div className="ct_container">
             <Header />
             <div className="ct_content">
-                <div className="ct_wrapper h5-clearfix">
-                    <React.Suspense fallback={null}>
-                        <Switch>
-                            <Redirect exact path="/" to="index" />
-                            <Route path="/index" component={MainPage} />
-                            <Route path="/search" component={Search} />
-                        </Switch>
-                    </React.Suspense>
-                </div>
+                <React.Suspense fallback={null}>
+                    <Switch>
+                        <Redirect exact path="/" to="index" />
+                        <Route path="/index" component={MainPage} />
+                        <Route path="/search" component={Search} />
+                        <Route path="/category" component={Category} />
+                        <Route path="/" compoennt={Page404} />
+                    </Switch>
+                </React.Suspense>
             </div>
             <Footer />
         </div>
