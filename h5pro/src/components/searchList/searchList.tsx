@@ -33,8 +33,8 @@ const SearchList:FC<ModelState> = (props) => {
     }
 
     return (
-        <div ref={wrapper} className='ct_product h5-clearfix' >
-            <div style={{paddingBottom: '55px'}}>
+        <div ref={wrapper} className='ct_product h5-clearfix' style={{paddingBottom: '55px'}} >
+            <div >
             {searchList.map((item) => {
                 return (<div className="pro_item" key={item.id}>
                     <a href={`product.html?productId=${item.id}`} className="pro_item_box">
