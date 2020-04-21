@@ -3,12 +3,13 @@ import {
 } from 'react'
 import BScroll from 'better-scroll'
 
-const useScroll = (wrapper?: HTMLDivElement) => {
+const useScroll = (wrapper?: HTMLDivElement | null, loading?: any) => {
     useEffect(() => {
-        if (wrapper) {
-            new BScroll(wrapper, { bounce: false })
+        console.log(wrapper)
+        if (wrapper && !loading) {
+            new BScroll(wrapper, { bounce: false, click: false })
         }
-    }, [wrapper])
+    },[wrapper, loading])
 }
 
 export default useScroll

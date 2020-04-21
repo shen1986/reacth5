@@ -1,5 +1,6 @@
 import React,{
     useRef,
+    FC,
 } from 'react'
 import {
     InputItem,
@@ -7,13 +8,27 @@ import {
 } from 'antd-mobile'
 import SearchList from '../../components/searchList'
 import useScroll from '../../hooks/useScroll'
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from "../../models";
 
-const Search = () => {
-    const wrapper = useRef(null)
-    useScroll(wrapper.current as any)
+const mapStateToProps = ({search, loading}: RootState) => ({
+    searchList: search.searchList,
+    loading: loading.effects["search/asyncGetSearchList"]
+})
+
+const connector = connect(mapStateToProps)
+
+export type ModelState = ConnectedProps<typeof connector>
+
+const Search: FC<ModelState> = (props) => {
+    const {
+        dispatch,
+        searchList,
+        loading,
+    } = props
 
     return (
-        <div className="search-wrapper h5-clearfix" ref={wrapper}>
+        <div className="search-wrapper h5-clearfix" >
             <div className="h5-clearfix">
             <List>
                 <InputItem
@@ -29,10 +44,14 @@ const Search = () => {
                     </div>
                 </List.Item>
             </List>
-            <SearchList />
+            <SearchList
+                loading={loading}
+                dispatch={dispatch}
+                searchList={searchList}
+            />
             </div>
         </div>
     )
 }
 
-export default Search
+export default connector(Search)

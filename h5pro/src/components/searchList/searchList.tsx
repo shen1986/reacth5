@@ -1,62 +1,41 @@
 import React, {
     FC,
     useEffect,
-    useState,
+    useRef,
+    // useState,
 } from 'react'
-import { ListView } from 'antd-mobile';
+import { ModelState } from '../../containers/search/search'
 import none01 from '../../images/none01.jpg'
+import useScroll from '../../hooks/useScroll'
 import './style.less'
 
-const data = [
-    {
-        id: 1,
-        pic: [],
-        prodName: "测试数据",
-        price: 100,
-        oldPrice: 120
-    },
-    {
-        id: 2,
-        pic: [],
-        prodName: "测试数据",
-        price: 100,
-        oldPrice: 120
-    },
-    {
-        id: 3,
-        pic: [],
-        prodName: "测试数据",
-        price: 100,
-        oldPrice: 120
-    },
-    {
-        id: 4,
-        pic: [],
-        prodName: "测试数据",
-        price: 100,
-        oldPrice: 120
-    },
-    {
-        id: 5,
-        pic: [],
-        prodName: "测试数据",
-        price: 100,
-        oldPrice: 120
-    },
-    {
-        id: 6,
-        pic: [],
-        prodName: "测试数据",
-        price: 100,
-        oldPrice: 120
-    }
-]
+const SearchList:FC<ModelState> = (props) => {
 
-const SearchList:FC = () => {
+    const {
+        dispatch,
+        searchList,
+        loading,
+    } = props
+
+    useEffect(() => {
+        dispatch({
+            type: "search/asyncGetSearchList"
+        })
+    }, [])
+
+    const wrapper = useRef<HTMLDivElement>(null)
+    useScroll(wrapper.current, loading)
+
+    if (loading) {
+        return (
+            <div>检索结果加载中</div>
+        )
+    }
 
     return (
-        <div className='ct_product h5-clearfix' style={{paddingBottom: '55px'}}>
-            {data.map((item) => {
+        <div ref={wrapper} className='ct_product h5-clearfix' >
+            <div style={{paddingBottom: '55px'}}>
+            {searchList.map((item) => {
                 return (<div className="pro_item" key={item.id}>
                     <a href={`product.html?productId=${item.id}`} className="pro_item_box">
                         {/* <% if(item.pic && item.pic[0]){ %> */}
@@ -71,7 +50,7 @@ const SearchList:FC = () => {
                     </a>
                 </div>
             )})}
-
+            </div>
         </div>
     )
 }
