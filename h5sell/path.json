@@ -21,10 +21,10 @@
                 "models/*"
             ],
             "@/services/*": [
-                "models/*"
+                "services/*"
             ],
             "@/styles/*": [
-                "models/*"
+                "styles/*"
             ]
         }
     }

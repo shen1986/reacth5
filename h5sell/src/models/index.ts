@@ -1,11 +1,11 @@
-import search from './search'
+import seller from './seller'
 import { DvaLoadingState } from 'dva-loading-ts'
 
-const models = [search]
+const models = [seller]
 
 export type RootState = {
-    search: typeof search.state,
-    loading: DvaLoadingState,
+    seller: typeof seller.state
+    loading: DvaLoadingState
 }
 
 export default models

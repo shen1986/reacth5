@@ -1,21 +1,40 @@
-/**
- * @Description: 首页布局
- * @Author: sam.zhu
- * @Company: 魔笙科技
- * @Date: 2019-09-04 15:08:43
- */
 import React,{
     FC,
-} from 'react';
-import Header from '@/components/header'
+    useEffect,
+} from 'react'
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from "@/models";
+import Header from '@/components/Header'
 
-const NavigationLayout:FC = () =>{
+interface INavProps {
+    seller: ISellerType
+}
+
+const mapStateToProps = ({ seller, loading }: RootState) => ({
+    seller: seller,
+    loading: loading.effects["seller/asyncGetSeller"]
+})
+
+const connector = connect(mapStateToProps)
+
+export type ModelState = ConnectedProps<typeof connector>
+
+const NavigationLayout: FC<ModelState> = (props) =>{
+    const {
+        seller,
+        dispatch
+    } = props
+    useEffect(() => {
+        dispatch({
+            type: "seller/asyncGetSeller"
+        })
+    }, [])
     // const seller ={}
     return (
         <div>
-            <Header />
+            <Header seller={seller}/>
         </div>
     )
 }
 
-export default NavigationLayout
+export default connector(NavigationLayout)
