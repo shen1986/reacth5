@@ -27,17 +27,19 @@ const sellerModel: SellerModel = {
     },
     reducers: {
         getSellerRs(state, { payload }) {
-            return payload
+            return {
+                seller: payload
+            }
         },
     },
     effects: {
         *asyncGetSeller({ payload }, { call, put }) {
             const seller = yield call(getSeller)
-            console.log(seller);
-            // yield put({
-            //     type: 'getSellerRs',
-            //     payload: seller,
-            // })
+            // console.log(seller);
+            yield put({
+                type: 'getSellerRs',
+                payload: seller.data,
+            })
         },
     },
 }
