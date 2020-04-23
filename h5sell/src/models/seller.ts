@@ -28,6 +28,7 @@ const sellerModel: SellerModel = {
     reducers: {
         getSellerRs(state, { payload }) {
             return {
+                ...state,
                 seller: payload
             }
         },

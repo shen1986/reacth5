@@ -1,7 +1,6 @@
 import React from 'react'
-// import NavigationLayout from './containers/navigationLayout'
 import { HashRouter as Router } from 'react-router-dom'
-import NavigationLayout from './containers/navigationLayout'
+import NavigationLayout from './containers/NavigationLayout'
 import { Provider } from 'react-redux'
 import store from '@/config/dva'
 

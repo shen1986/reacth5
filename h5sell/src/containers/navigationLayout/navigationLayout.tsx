@@ -3,22 +3,18 @@ import React,{
     useEffect,
 } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { RootState } from "../../models";
+import { RootState } from '@/models/index'
 import {
-    // Link,
     Switch,
     Route,
     Redirect,
     NavLink,
 } from 'react-router-dom'
 import Header from '@/components/Header'
-import classNames from 'classnames'
 
 import './style.less'
 
-interface INavProps {
-    seller: ISellerType
-}
+const Goods = React.lazy(() => import('@/containers/Goods'))
 
 const mapStateToProps = ({ seller, loading }: RootState) => ({
     seller: seller.seller,
@@ -43,7 +39,7 @@ const NavigationLayout: FC<ModelState> = (props) =>{
         <div>
             <Header seller={seller}/>
             <div className="tab border-1px">
-                <div className={classNames("tab-item", )}>
+                <div className="tab-item">
                     <NavLink to="/goods">商品</NavLink>
                 </div>
                 <div className="tab-item">
@@ -56,7 +52,7 @@ const NavigationLayout: FC<ModelState> = (props) =>{
             <React.Suspense fallback={null}>
                 <Switch>
                     <Redirect exact path="/" to="/goods" />
-                    <Route path="/goods" component={() => <>123</>} />
+                    <Route path="/goods" component={Goods} />
                     <Route path="/ratings" component={() => <>123</>} />
                     <Route path="/seller" component={() => <>123</>} />
                 </Switch>
