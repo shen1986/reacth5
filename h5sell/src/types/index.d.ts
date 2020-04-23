@@ -11,12 +11,13 @@ interface ISellerType {
 interface IGoodsType {
     name: string
     type: number
-    foods: IFoodsType[]
+    foods: IFoodType[]
 }
 
-interface IFoodsType {
+interface IFoodType {
     icon: string
     name: string
+    count: number
     description: string
     sellCount: number
     rating: number

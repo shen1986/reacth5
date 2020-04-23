@@ -67,12 +67,12 @@ const Header:FC<IHeaderProps> = (props) => {
             </div>
                 <div v-if="seller.supports" className="support-count" onClick={showDetail}>
                 <span className="count">{seller?.supports?.length}个</span>
-                <i className="icon-keyboard_arrow_right"></i>
+                <i className="icon-chevron-right"></i>
             </div>
             </div>
             <div className="bulletin-wrapper" onClick={showDetail}>
             <span className="bulletin-title"></span><span className="bulletin-text">{seller?.bulletin}</span>
-            <i className="icon-keyboard_arrow_right"></i>
+                <i className="icon-chevron-right"></i>
             </div>
             <div className="background">
                 <img src={seller?.avatar} alt="" width="100%" height="100%" />

@@ -36,7 +36,6 @@ const sellerModel: SellerModel = {
     effects: {
         *asyncGetSeller({ payload }, { call, put }) {
             const seller = yield call(getSeller)
-            // console.log(seller);
             yield put({
                 type: 'getSellerRs',
                 payload: seller.data,

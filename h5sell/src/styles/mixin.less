@@ -31,27 +31,101 @@
 }
 
 .bg-image(@url) {
-  background-image: url("@{url}@2x.png");
-  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
-    background-image: url("@{url}@3x.png");
-  }
+    background-image: url("@{url}@2x.png");
+
+    @media (-webkit-min-device-pixel-ratio: 3),
+    (min-device-pixel-ratio: 3) {
+        background-image: url("@{url}@3x.png");
+    }
 }
 
 .border-1px(@color) {
-  position: relative;
-  &:after {
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    border-top: 1px solid @color;
-    content: ' ';
-  }
+    position: relative;
+
+    &:after {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid @color;
+        content: ' ';
+    }
 }
 
 .border-none() {
-  &:after {
-    display: none
-  }
+    &:after {
+        display: none
+    }
+}
+
+.transition-move-enter() {
+    &.move-enter {
+        opacity: 0;
+        transform: translate3d(24px, 0, 0);
+
+        .inner {
+            transform: rotate(180deg)
+        }
+    }
+
+    &.move-exit-active {
+        opacity: 0.5;
+        transform: translate3d(0, 0, 0);
+
+        .inner {
+            transform: rotate(90deg);
+            transition: all 0.4s linear;
+        }
+
+
+        transition: all 0.4s linear
+    }
+
+    &.move-enter-done {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+
+        .inner {
+            transform: rotate(0deg);
+            transition: all 0.4s linear;
+        }
+
+        transition: all 0.4s linear
+    }
+}
+
+.transition-move-exit() {
+    &.move-exit {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+
+        .inner {
+            transform: rotate(0deg)
+        }
+    }
+
+    &.move-exit.move-exit-active {
+        opacity: 0.5;
+        transform: translate3d(12px, 0, 0);
+
+        .inner {
+            transform: rotate(90deg);
+            transition: all 0.4s linear;
+        }
+
+        transition: all 0.4s linear;
+    }
+
+    &.move-exit-done {
+        opacity: 0;
+        transform: translate3d(24px, 0, 0);
+
+        .inner {
+            transform: rotate(180deg);
+            transition: all 0.4s linear;
+        }
+
+        transition: all 0.4s linear;
+    }
 }

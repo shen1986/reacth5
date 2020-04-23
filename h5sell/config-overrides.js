@@ -59,5 +59,5 @@ module.exports = override(
 
         return config
     },
-    isProd ? setWebpackPublicPath('http:www.shenxf.com/reactsell/') : undefined
+    isProd ? setWebpackPublicPath('reactsell/') : undefined
 )

@@ -913,3 +913,30 @@ const goodsData = {
 export const getGoods = () => {
     return Promise.resolve(goodsData)
 }
+
+export const addCart = (goodName: string, foodName: string) => {
+    const good = goodsData.data.find(item =>item.name === goodName)
+    const food = (good?.foods as any[]).find(item => item.name === foodName)
+    if (food.count) {
+        food.count ++
+    } else {
+        food.count = 1
+    }
+    goodsData.data = JSON.parse(JSON.stringify(goodsData.data))
+    return Promise.resolve(goodsData)
+}
+
+export const decreaseCart = (goodName: string, foodName: string) => {
+    const good = goodsData.data.find(item => item.name === goodName)
+    const food = (good?.foods as any[]).find(item => item.name === foodName)
+    if (food.count) {
+        food.count--
+        if (food.count < 0) {
+            food.count = 0
+        }
+    } else {
+        food.count = 0
+    }
+    goodsData.data = JSON.parse(JSON.stringify(goodsData.data))
+    return Promise.resolve(goodsData)
+}

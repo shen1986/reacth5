@@ -3,24 +3,30 @@ import {
     Effect,
 } from 'dva-core-ts'
 import { Reducer } from 'redux'
-import { getGoods } from "@/services/goodsService"
+import {
+    getGoods,
+    addCart,
+    decreaseCart,
+} from "@/services/goodsService"
 
-export interface SellerState {
+export interface GoodsState {
     goods: IGoodsType[]
 }
 
-interface SellerModel extends Model {
+interface GoodsModel extends Model {
     namespace: 'goods'
-    state: SellerState
+    state: GoodsState
     reducers: {
-        getGoodsRs: Reducer<SellerState>
+        getGoodsRs: Reducer<GoodsState>
     }
     effects?: {
         asyncGetGoods: Effect
+        asyncAddCart: Effect
+        asyncDecreaseCart: Effect
     }
 }
 
-const sellerModel: SellerModel = {
+const goodsModel: GoodsModel = {
     namespace: 'goods',
     state: {
         goods: [],
@@ -41,7 +47,21 @@ const sellerModel: SellerModel = {
                 payload: goods.data,
             })
         },
+        *asyncAddCart({ payload }, { call, put }) {
+            const goods = yield call(addCart, payload.goodName, payload.foodName)
+            yield put({
+                type: 'getGoodsRs',
+                payload: goods.data
+            })
+        },
+        *asyncDecreaseCart({ payload }, { call, put }) {
+            const goods = yield call(decreaseCart, payload.goodName, payload.foodName)
+            yield put({
+                type: 'getGoodsRs',
+                payload: goods.data
+            })
+        }
     },
 }
 
-export default sellerModel
+export default goodsModel

@@ -13,6 +13,7 @@ import { RootState } from '@/models/index'
 import BScroll, {
     Position,
 } from 'better-scroll';
+import Cartcontrol from '@/components/Cartcontrol'
 import classNames from 'classnames'
 import './style.less'
 
@@ -117,6 +118,17 @@ const Goods: FC<ModelState> = (props) => {
         // this.$refs.food.show();
     }
 
+    const addFood = (target: any) => {
+        _drop(target);
+    }
+
+    const _drop = (target: any) => {
+        // 体验优化,异步执行下落动画
+        // this.$nextTick(() => {
+        //     this.$refs.shopcart.drop(target);
+        // });
+    }
+
     return (
         <div>
             <div className="goods">
@@ -154,12 +166,11 @@ const Goods: FC<ModelState> = (props) => {
                             return (
                                 <li className="food-list"
                                     key={i}
-                                    // @ts-ignore：无法被执行的代码的错误
                                     ref={(ref) => foodList.current[i] = ref as HTMLLIElement}
                                 >
                                     <h1 className="title">{ item.name }</h1>
                                     <ul>
-                                        {item.foods.map((food: IFoodsType, index) =>{
+                                        {item.foods.map((food: IFoodType, index) =>{
                                             return (
                                                 <li
                                                     key={index}
@@ -184,7 +195,12 @@ const Goods: FC<ModelState> = (props) => {
                                                             }
                                                         </div>
                                                         <div className="cartcontrol-wrapper">
-                                                            {/* <cartcontrol @add="addFood" :food="food"></cartcontrol> */}
+                                                            <Cartcontrol
+                                                                dispatch={dispatch}
+                                                                goodName={item.name}
+                                                                add={addFood}
+                                                                food={food}
+                                                            />
                                                         </div>
                                                     </div>
                                                 </li>
