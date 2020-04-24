@@ -14,6 +14,7 @@ import BScroll, {
     Position,
 } from 'better-scroll';
 import Cartcontrol from '@/components/Cartcontrol'
+import Shopcart from '@/components/Shopcart'
 import classNames from 'classnames'
 import './style.less'
 
@@ -26,10 +27,17 @@ const connector = connect(mapStateToProps)
 
 export type ModelState = ConnectedProps<typeof connector>
 
-const Goods: FC<ModelState> = (props) => {
+interface IGoodsProps {
+    seller: ISellerType
+}
+
+type ILocalProps = IGoodsProps & ModelState
+
+const Goods: FC<ILocalProps> = (props) => {
     const {
         dispatch,
         goods,
+        seller
     } = props
 
     const menuWrapper = useRef<HTMLDivElement>(null)
@@ -102,9 +110,6 @@ const Goods: FC<ModelState> = (props) => {
     }
 
     const selectMenu = (index: number, event: any) => {
-        if (!event._constructed) {
-            return;
-        }
         let tempFoodList = foodList.current;
         let el = tempFoodList[index];
         foodsScroll.current?.scrollToElement(el, 300);
@@ -213,6 +218,13 @@ const Goods: FC<ModelState> = (props) => {
                     }
                 </ul>
                 </div>
+                <Shopcart
+                    // selectFoods={selectFood}
+                    deliveryPrice={seller?.deliverPrice}
+                    minPrice={seller?.minPrice}
+                    dispatch={dispatch}
+                    goodName={"asd"}
+                />
             {/* <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
                          :minPrice="seller.minPrice"></shopcart> */}
         </div>

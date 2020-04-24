@@ -45,7 +45,7 @@ const Cartcontrol: FC<ICartProps> = (props) => {
         <div className="cartcontrol">
             {
                 <Transition
-                    in={food.count > 0}
+                    in={food.count! > 0}
                     timeout={100}
                     animation="move"
                 >
@@ -55,7 +55,7 @@ const Cartcontrol: FC<ICartProps> = (props) => {
                 </Transition>
             }
             {
-                food.count > 0 &&
+                food.count! > 0 &&
                 <div className="cart-count" >{ food.count }</div>
             }
             <div className="cart-add icon-circle-with-plus" onClick={(event) => addCart(event)} />

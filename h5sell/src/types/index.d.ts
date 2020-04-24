@@ -6,6 +6,8 @@ interface ISellerType {
     supports: any
     bulletin: string
     score: number
+    deliverPrice: number
+    minPrice: number
 }
 
 interface IGoodsType {
@@ -15,13 +17,13 @@ interface IGoodsType {
 }
 
 interface IFoodType {
-    icon: string
-    name: string
-    count: number
-    description: string
-    sellCount: number
-    rating: number
-    price: number
-    oldPrice: number
+    icon?: string
+    name?: string
+    count?: number
+    description?: string
+    sellCount?: number
+    rating?: number
+    price?: number
+    oldPrice?: number
     
 }
