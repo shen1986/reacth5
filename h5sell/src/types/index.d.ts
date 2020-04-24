@@ -8,6 +8,11 @@ interface ISellerType {
     score: number
     deliverPrice: number
     minPrice: number
+    deliveryPrice: number
+    ratingCount: number
+    sellCount: number
+    pics: string[]
+    infos: string[]
 }
 
 interface IGoodsType {

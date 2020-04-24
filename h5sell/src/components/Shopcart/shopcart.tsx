@@ -188,14 +188,6 @@ const Shopcart:FC<IShopcartProps> = (props) => {
                         )
                     })
                 }
-                {/* <div v-for="ball in balls"> */}
-
-                {/* <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
-                    <div className="ball" v-show="ball.show">
-                    <div className="inner inner-hook"></div>
-                    </div>
-                </transition> */}
-                {/* </div> */}
             </div>
             <Transition
                 name="fold"
@@ -203,60 +195,36 @@ const Shopcart:FC<IShopcartProps> = (props) => {
                 timeout={300}
             >
                 <div className="shopcart-list">
-                <div className="list-header">
-                    <h1 className="title">购物车</h1>
-                    <span className="empty" onClick={empty}>清空</span>
-                </div>
-                <div className="list-content" ref={listContent}>
-                    <ul>
-                        {selectFoods?.map( food => {
+                    <div className="list-header">
+                        <h1 className="title">购物车</h1>
+                        <span className="empty" onClick={empty}>清空</span>
+                    </div>
+                    <div className="list-content" ref={listContent}>
+                        <ul>
+                            {selectFoods?.map( food => {
 
-                            return (
-                            <li className="food">
-                                <span className="name">{food.name}</span>
-                                <div className="price">
-                                <span>￥{food.price!*food.count!}</span>
-                                </div>
-                                <div className="cartcontrol-wrapper">
-                                    <Cartcontrol
-                                        dispatch={dispatch}
-                                        goodName={food.goodName!}
-                                        add={addFood}
-                                        food={food}
-                                    />
-                                </div>
-                            </li>
-                            )
-                        })}
-                    
-                    </ul>
-                </div>
+                                return (
+                                <li className="food">
+                                    <span className="name">{food.name}</span>
+                                    <div className="price">
+                                    <span>￥{food.price!*food.count!}</span>
+                                    </div>
+                                    <div className="cartcontrol-wrapper">
+                                        <Cartcontrol
+                                            dispatch={dispatch}
+                                            goodName={food.goodName!}
+                                            add={addFood}
+                                            food={food}
+                                        />
+                                    </div>
+                                </li>
+                                )
+                            })}
+                        
+                        </ul>
+                    </div>
                 </div>
             </Transition>
-            {/* <transition name="fold">
-                <div className="shopcart-list" v-show="listShow">
-                <div className="list-header">
-                    <h1 className="title">购物车</h1>
-                    <span className="empty" @click="empty">清空</span>
-                </div>
-                <div className="list-content" ref="listContent">
-                    <ul>
-                    <li className="food" v-for="food in selectFoods">
-                        <span className="name">{{food.name}}</span>
-                        <div className="price">
-                        <span>￥{{food.price*food.count}}</span>
-                        </div>
-                        <div className="cartcontrol-wrapper">
-                            <Cartcontrol
-                                food={food}
-                                add={addFood}
-                            />
-                        </div>
-                    </li>
-                    </ul>
-                </div>
-                </div>
-            </transition> */}
             </div>
             <Transition
                 name="fade"

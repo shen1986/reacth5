@@ -15,6 +15,7 @@ import Header from '@/components/Header'
 import './style.less'
 
 const Goods = React.lazy(() => import('@/containers/Goods'))
+const Seller = React.lazy(() => import('@/containers/Seller'))
 
 const mapStateToProps = ({ seller, loading }: RootState) => ({
     seller: seller.seller,
@@ -54,7 +55,7 @@ const NavigationLayout: FC<ModelState> = (props) =>{
                     <Redirect exact path="/" to="/goods" />
                     <Route path="/goods" component={Goods} />
                     <Route path="/ratings" component={() => <>123</>} />
-                    <Route path="/seller" component={() => <>123</>} />
+                    <Route path="/seller" component={Seller} />
                 </Switch>
             </React.Suspense>
         </div>
