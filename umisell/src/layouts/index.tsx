@@ -1,4 +1,4 @@
-import React,{
+import React, {
     FC,
     useEffect,
 } from 'react';
@@ -26,27 +26,30 @@ const BasicLayout: FC<PageProps> = props => {
     } = props
 
     useEffect(() => {
-        dispatch({ type: "seller/asyncGetSeller"})
+        dispatch({ type: "seller/asyncGetSeller" })
     }, [dispatch])
 
     return (
         <div>
             <Header seller={seller} />
             {
-                loading && <div>画面加载中</div>
+                loading ? <div>画面加载中</div> :
+                    <>
+                        <div className={[style.tab, style["border-1px"]].join(" ")}>
+                            <div className={style.tabItem}>
+                                <NavLink activeClassName={style.active} to="/goods">商品</NavLink>
+                            </div>
+                            <div className={style.tabItem}>
+                                <NavLink activeClassName={style.active} to="/ratings">评论</NavLink>
+                            </div>
+                            <div className={style.tabItem}>
+                                <NavLink activeClassName={style.active} to="/seller">商家</NavLink>
+                            </div>
+                        </div>
+                        {props.children}
+                    </>
             }
-            <div className={[style.tab, style["border-1px"]].join(" ")}>
-                <div className={style.tabItem}>
-                    <NavLink activeClassName={style.active} to="/goods">商品</NavLink>
-                </div>
-                <div className={style.tabItem}>
-                    <NavLink activeClassName={style.active} to="/ratings">评论</NavLink>
-                </div>
-                <div className={style.tabItem}>
-                    <NavLink activeClassName={style.active} to="/seller">商家</NavLink>
-                </div>
-            </div>
-            {props.children}
+
         </div>
     );
 };
