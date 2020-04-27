@@ -9,6 +9,10 @@ interface SellerModel {
     seller: ISellerType;
 }
 
+interface GoodsModel {
+    goods: IGoodsType[]
+}
+
 export interface DvaLoadingState {
     global: boolean;
     models: { [type: string]: boolean | undefined };
@@ -18,6 +22,7 @@ export interface DvaLoadingState {
 export interface GlobalState {
     counter: CounterModel;
     seller: SellerModel;
+    goods: GoodsModel;
     loading: DvaLoadingState;
 }
 
