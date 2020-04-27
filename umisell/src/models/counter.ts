@@ -1,4 +1,4 @@
-import { GlobalState } from '@/common/type';
+import { GlobalState } from '@/common/types/type';
 import { DvaModelBuilder } from 'dva-model-creator';
 import {
     add,

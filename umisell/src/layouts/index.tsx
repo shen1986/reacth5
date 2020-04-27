@@ -4,12 +4,13 @@ import React,{
 } from 'react';
 import NavLink from 'umi/navlink'
 import style from './index.less';
+import Header from '@/components/Header'
 import { connect } from "dva";
-import { GlobalState, UmiComponentProps } from "@/common/type";
+import { GlobalState, UmiComponentProps } from "@/common/types/type";
 
 const mapStateToProps = ({ seller, loading }: GlobalState) => {
     return {
-        seller,
+        seller: seller.seller,
         loading: loading.effects["seller/asyncGetSeller"]
     };
 };
@@ -28,25 +29,21 @@ const BasicLayout: FC<PageProps> = props => {
         dispatch({ type: "seller/asyncGetSeller"})
     }, [dispatch])
 
-    useEffect(() => {
-        console.log(seller);
-    }, [seller])
-
     return (
         <div>
-            <div>标题</div>
+            <Header seller={seller} />
             {
                 loading && <div>画面加载中</div>
             }
-            <div className={[style.tab, style.border1px].join(" ")}>
+            <div className={[style.tab, style["border-1px"]].join(" ")}>
                 <div className={style.tabItem}>
-                    <NavLink to="/goods">商品</NavLink>
+                    <NavLink activeClassName={style.active} to="/goods">商品</NavLink>
                 </div>
                 <div className={style.tabItem}>
-                    <NavLink to="/ratings">评论</NavLink>
+                    <NavLink activeClassName={style.active} to="/ratings">评论</NavLink>
                 </div>
                 <div className={style.tabItem}>
-                    <NavLink to="/seller">商家</NavLink>
+                    <NavLink activeClassName={style.active} to="/seller">商家</NavLink>
                 </div>
             </div>
             {props.children}
