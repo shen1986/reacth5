@@ -1,0 +1,38 @@
+@import './mixin.less';
+.zoom-animation(top, scaleY(0), scaleY(1), center top);
+.zoom-animation(left, scale(.45, .45), scale(1, 1), top left);
+.zoom-animation(right, scale(.45, .45), scale(1, 1), top right);
+.zoom-animation(bottom, scaleY(0), scaleY(1), center bottom);
+
+// 渐进渐出
+//入场动画
+.fade-enter,
+fade-appear {
+    opacity: 0;
+}
+
+.fade-enter-active,
+fade-appear-active {
+    opacity: 0.5;
+    transition: opacity 150ms ease-in;
+}
+
+.fade-enter-done {
+    opacity: 1;
+    transition: opacity 150ms ease-in;
+}
+
+//出场动画
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0.5;
+    transition: opacity 150ms ease-in;
+}
+
+.fade-exit-done {
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+}

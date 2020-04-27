@@ -1,0 +1,146 @@
+// 所有方法
+
+// 共通动画方法
+.zoom-animation(@direction: 'top',
+  @scaleStart: scaleY(0),
+  @scaleEnd: scaleY(1),
+  @origin: center top,
+) {
+  .zoom-in-@{direction}-enter {
+    opacity: 0;
+    transform: @scaleStart;
+  }
+
+  .zoom-in-@{direction}-enter-active {
+    opacity: 1;
+    transform: @scaleEnd;
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+    transform-origin: @origin;
+  }
+
+  .zoom-in-@{direction}-exit {
+    opacity: 1;
+  }
+
+  .zoom-in-@{direction}-exit-active {
+    opacity: 0;
+    transform: @scaleStart;
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+    transform-origin: @origin;
+  }
+}
+
+.bg-image(@url) {
+  background-image: url("..\\assets\\images\\@{url}@2x.png");
+
+  @media (-webkit-min-device-pixel-ratio: 3),
+  (min-device-pixel-ratio: 3) {
+    background-image: url("..\\assets\\images\\@{url}@3x.png");
+  }
+}
+
+.border-1px(@color) {
+  position: relative;
+
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid @color;
+    content: ' ';
+  }
+}
+
+.border-none() {
+  &:after {
+    display: none
+  }
+}
+
+.transition-move-enter() {
+  &.move-enter {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+
+    .inner {
+      transform: rotate(180deg)
+    }
+  }
+
+  &.move-exit-active {
+    opacity: 0.5;
+    transform: translate3d(0, 0, 0);
+
+    .inner {
+      transform: rotate(90deg);
+      transition: all 0.4s linear;
+    }
+
+
+    transition: all 0.4s linear
+  }
+
+  &.move-enter-done {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+
+    .inner {
+      transform: rotate(0deg);
+      transition: all 0.4s linear;
+    }
+
+    transition: all 0.4s linear
+  }
+}
+
+.transition-move-exit() {
+  &.move-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+
+    .inner {
+      transform: rotate(0deg)
+    }
+  }
+
+  &.move-exit.move-exit-active {
+    opacity: 0.5;
+    transform: translate3d(12px, 0, 0);
+
+    .inner {
+      transform: rotate(90deg);
+      transition: all 0.4s linear;
+    }
+
+    transition: all 0.4s linear;
+  }
+
+  &.move-exit-done {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+
+    .inner {
+      transform: rotate(180deg);
+      transition: all 0.4s linear;
+    }
+
+    transition: all 0.4s linear;
+  }
+}
+
+
+// 清除浮动
+.clearfix() {
+  display: inline-block;
+
+  &:after {
+    display: block;
+    content: ".";
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
