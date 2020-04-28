@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.less';
-import Link from 'umi/link';
+import { Link } from 'umi';
 import { Layout, Menu } from 'antd';
 
 const { Header, Content, Footer } = Layout;
