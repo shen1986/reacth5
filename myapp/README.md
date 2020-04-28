@@ -1,15 +1,7 @@
 # umi project
 
-## Getting Started
+## 1号坑
+- https://github.com/umijs/umi/issues/4551
 
-Install dependencies,
-
-```bash
-$ yarn
-```
-
-Start the dev server,
-
-```bash
-$ yarn start
-```
+## 2号坑
+- https://github.com/umijs/umi/issues/4360
